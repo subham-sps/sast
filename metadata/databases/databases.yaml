@@ -1,1 +1,16 @@
-[]
+- name: Chinook
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url: postgresql://neondb_owner:W5bNDM3JFrdB@ep-twilight-unit-a6lwr60l.us-west-2.aws.neon.tech/chinook?sslmode=require
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include Chinook/tables/tables.yaml"
+- name: Sonarqube
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url: postgresql://neondb_owner:eRqE3iULlZT4@ep-winter-sound-a5hw7hni.us-east-2.aws.neon.tech/neondb?sslmode=require
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include Sonarqube/tables/tables.yaml"

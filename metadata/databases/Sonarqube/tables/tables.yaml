@@ -1,0 +1,3 @@
+- "!include public_findings.yaml"
+- "!include public_projects.yaml"
+- "!include public_scans.yaml"

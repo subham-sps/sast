@@ -1,0 +1,7 @@
+table:
+  name: findings
+  schema: public
+object_relationships:
+  - name: scan
+    using:
+      foreign_key_constraint_on: scan_id
