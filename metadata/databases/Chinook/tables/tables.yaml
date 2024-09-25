@@ -1,1 +1,2 @@
-[]
+- "!include public_album.yaml"
+- "!include public_artist.yaml"
