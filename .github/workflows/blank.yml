@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Environment to Value
-        id : deployEnv
+        id: deployEnv
         run: |
           # Define the environment mapping
           declare -A envMap
@@ -39,6 +39,9 @@ jobs:
           fi
 
           # Output the mapped value
-          echo "Mapped Value: $mapped_value"
-      - name: Run Hasura command
+          echo "::set-output name=value::$mapped_value"
+        outputs:
+          value: ${{ steps.deployEnv.outputs.value }}
+
+      - name: Run command
         run: echo "The mapped value is ${{ steps.deployEnv.outputs.value }}"
