@@ -1,0 +1,43 @@
+name: Environment Deployment
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select the environment"
+        required: true
+        type: choice
+        options:
+          - Development
+          - Staging
+          - Production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Map Environment to Value
+        run: |
+          # Define the environment mapping
+          declare -A envMap
+          envMap[Development]="localhost:8080"
+          envMap[Staging]="stage_env"
+          envMap[Production]="prod_env"
+
+          # Access the selected environment from the GitHub Actions input
+          selected_env="${{ github.event.inputs.environment }}"
+          echo "Selected Environment: $selected_env"
+
+          # Map the selected environment to its value
+          mapped_value=${envMap[$selected_env]}
+
+          # Validate the selection
+          if [ -z "$mapped_value" ]; then
+              echo "Error: Invalid environment selected."
+              exit 1
+          fi
+
+          # Output the mapped value
+          echo "Mapped Value: $mapped_value"
+      - name: Run Hasura command
+        run: echo "The mapped value is ${{ steps.map.outputs.value }}"
